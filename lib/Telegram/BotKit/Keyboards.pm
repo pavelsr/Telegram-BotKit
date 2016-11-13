@@ -37,17 +37,14 @@ Create a regular one time keyboard.
 For using with (L<reply_markup|https://core.telegram.org/bots/api/#sendmessage>) 
 param of API sendMessage method
 
-my $api = WWW::Telegram::BotAPI->new (
-    token => 'my_token'
-);
-
-# $keyboard = create_one_time_keyboard($arrayref, $max_keys_per_row);
-$keyboard = create_one_time_keyboard(['Button1', 'Button2', 'Button3'], 2);
+$keyboard = create_one_time_keyboard($arrayref, $max_keys_per_row);
 
 $api->sendMessage ({
     chat_id      => 123456,
     reply_markup => $keyboard
 });
+
+If no $max_keys_per_row specified keyboard will have only one column
 
 =cut
 
@@ -55,7 +52,7 @@ $api->sendMessage ({
 sub create_one_time_keyboard {
 	my ($keys, $k_per_row) = @_;
 	if (!(defined $k_per_row)) { 
-		if ($is_inline) { $k_per_row = scalar @$keys } else { $k_per_row = 1 };
+		if ($is_inline_flag) { $k_per_row = scalar @$keys } else { $k_per_row = 1 };
 	}
 
 	my @keyboard;
@@ -99,7 +96,7 @@ $api->sendMessage ({
 sub create_inline_keyboard {
 	my ($keys, $k_per_row) = @_;
 	if (!(defined $k_per_row)) { 
-		if ($is_inline) { $k_per_row = scalar @$keys } else { $k_per_row = 1 };
+		if ($is_inline_flag) { $k_per_row = scalar @$keys } else { $k_per_row = 1 };
 	}
 	my @keyboard;
 	my @row;

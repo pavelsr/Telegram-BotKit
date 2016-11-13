@@ -8,15 +8,15 @@ use Config::JSON;
 use Telegram::BotKit::Screens;
 use Class::Inspector;
 
-my $screens = Config::JSON->new('screens.json')->get('screens');
-my $obj = Telegram::Screens->new($screens);
+my $screens = Config::JSON->new('t/screens.json')->get('screens');
+my $obj = Telegram::BotKit::Screens->new($screens);
+
 # Class::Inspector - https://metacpan.org/pod/Class::Inspector
 # Class::Sniff - https://metacpan.org/pod/Class::Sniff
+# my $methods = Class::Inspector->methods('Telegram::Screens', 'public' );
+# warn "Available methods:".	Dumper $methods;
 
-my $methods = Class::Inspector->methods('Telegram::Screens', 'public' );
-warn "Available methods:".	Dumper $methods;
-
-use Test::Simple tests => 22;
+use Test::Simple tests => 23;
 my $screen;
 
 # get_answ_by_key()

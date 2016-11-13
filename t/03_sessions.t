@@ -50,8 +50,8 @@ ok( eq_hash
 		}),
 		{
 	          'replies' => {
-	                         'item_select' => 'Item 1',
-	                         'day_select' => undef
+	                         'item_select' => 'Item 1'
+	                         # 'day_select' => undef
 	                       }
 	    }
 	)

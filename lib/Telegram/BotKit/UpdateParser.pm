@@ -15,7 +15,7 @@ package Telegram::BotKit::UpdateParser;
 use common::sense;
 
 use Exporter qw(import);
-our @EXPORT_OK = qw(get_text get_chat_id);
+our @EXPORT_OK = qw(get_chat_id get_text);
 
 
 sub _parse {

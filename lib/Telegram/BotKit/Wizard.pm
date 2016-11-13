@@ -2,14 +2,6 @@ package Telegram::BotKit::Wizard;
 
 # ABSTRACT: State automat for Telegram Bots
 
-use common::sense;
-use Data::Dumper;
-use Telegram::BotKit::Screens;
-use Telegram::BotKit::Sessions;
-use Telegram::BotKit::UpdateParser qw(get_text get_chat_id);
-use Telegram::BotKit::Keyboards qw(create_one_time_keyboard create_inline_keyboard);
-use Module::Load;
-
 =head1 SYNOPSIS
 
 my $wizard = Telegram::BotKit::Wizard->new({ 
@@ -27,11 +19,20 @@ $api->sendMessage($msg);  # my $api = WWW::Telegram::BotAPI->new(token => '');
 =cut
 
 
+use common::sense;
+use Data::Dumper;
+use Telegram::BotKit::Screens;
+use Telegram::BotKit::Sessions;
+use Telegram::BotKit::UpdateParser qw(get_text get_chat_id);
+use Telegram::BotKit::Keyboards qw(create_one_time_keyboard create_inline_keyboard);
+use Telegram::BotKit::UpdateParser qw(get_chat_id get_text);
+use Module::Load;
+
 sub new {
     my ($class, $params) = @_;
     my $h = {};
-    $h->{sessions} = Telegram::Sessions->new;
-    $h->{screens} = Telegram::Screens->new($params->{screens_arrayref});
+    $h->{sessions} = Telegram::BotKit::Sessions->new;
+    $h->{screens} = Telegram::BotKit::Screens->new($params->{screens_arrayref});
     
     my $dyn_kb_class = $params->{dyn_kbs_class};
     autoload $dyn_kb_class;
@@ -183,8 +184,8 @@ sub process {
 	my ($self, $update) = @_;
 	my $msg = {};  # to return 
 
-	my $chat_id = Telegram::UpdateParser::get_chat_id($update);
-	my $text = Telegram::UpdateParser::get_text($update);
+	my $chat_id = get_chat_id($update);
+	my $text = get_text($update);
 
 	
 
