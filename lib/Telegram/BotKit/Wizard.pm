@@ -14,10 +14,10 @@ use Module::Load;
 
 my $wizard = Telegram::BotKit::Wizard->new({ 
 	screens_arrayref => [{},{}, ... , {}], 
-	dyn_kbs_class=>'Test::Class',     
-    serialize_func => \&test_func(), # not implemented now
-    keyboard_type => 'inline'  # regular by default,
-    default_welcome_msg => '', # message to show if there is no 'welcome_msg' attr at screen
+	dyn_kbs_class=>'Test::Class',
+	serialize_func => \&test_func(), # not implemented now
+	keyboard_type => 'inline'  # regular by default,
+	default_welcome_msg => '', # message to show if there is no 'welcome_msg' attr at screen
 	debug => 1
 )};
 
