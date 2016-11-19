@@ -1,58 +1,46 @@
 # NAME
 
-Telegram::BotKit::Wizard - State automat for Telegram Bots
+Telegram::BotKit - Set of Perl classes for creation of interactive and dynamic Telegram bots. Now bots can only process text, but work in progress :)
 
 # VERSION
 
 version 0.01
 
-# SYNOPSIS
+# KEY FEATURES
 
-my $wizard = Telegram::BotKit::Wizard->new({ 
-	screens\_arrayref => \[{},{}, ... , {}\], 
-	dyn\_kbs\_class=>'Test::Class',
-	serialize\_func => \\&test\_func(), # not implemented now
-	keyboard\_type => 'inline'  # regular by default,
-	default\_welcome\_msg => '', # message to show if there is no 'welcome\_msg' attr at screen
-	debug => 1
-)};
+- 1.State machine in JSON file
 
-my $msg = $w->process($update);
-$api->sendMessage($msg);  # my $api = WWW::Telegram::BotAPI->new(token => '');
+    Allows to create a simple bots for house even for housewife
 
-# METHODS
+- 2.Support of dymanic screens
 
-## defaults
+    screen = text \[and/or\] image \[and/or\] document \[and/or\] voice \[and/or\] location \[and/or\] reply markup
 
-Set defaults for non-obligatory parameters
+- 3. independent and prev msg dependent screens
 
-## get\_screen
+    Screens can be shown just according sequence in JSON or can depends on previous user reply (callback\_msg property)
 
-Get screen depending on was /start cmd sent or previous screen in session
+- 4.Data validation
 
-## build\_keyboard\_array 
+    Bot can automatically control is last user reply valid and show pre-defined message if reply is not valid
 
-Create an array for keyboard
+- 5.Smart serialization
 
-Works both with static or dynamic screens
+    At last screen bot is calling some perl function that uses some external API.
 
-## build\_msg
+    Bot store sequence of user inputs and can process data before calling serialize function
 
-Build message depending on $screen, $chat\_id and $callback\_msg
+- 6.Auto 'Go back' key
 
-$self->build\_msg($screen, $chat\_id, $text)
+    For convenience
 
-## update\_session
+    &#x3d; back
 
-Correct update of session.
-Here you can see which parameters of screen to save
+# STATE DIAGRAM
 
-## process
+# CONFIGURATION EXAMPLE 
 
-Main public subroutine.
-Process Update object and return msg for 
-[sendMessage](https://core.telegram.org/bots/api/#sendmessage) 
-method
+Here is example of simple booking bot
 
 # AUTHOR
 
@@ -64,3 +52,15 @@ This software is copyright (c) 2016 by Pavel Serikov.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
+
+# POD ERRORS
+
+Hey! **The above document had some coding errors, which are explained below:**
+
+- Around line 45:
+
+    You forgot a '=back' before '=head1'
+
+- Around line 91:
+
+    '=end' without a target? (Should be "=end javascript")
