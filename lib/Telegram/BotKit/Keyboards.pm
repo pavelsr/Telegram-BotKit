@@ -22,6 +22,7 @@ package Telegram::BotKit::Keyboards;
 
 =cut
 
+use uft8;
 use JSON::MaybeXS;
 use common::sense;
 
