@@ -22,9 +22,9 @@ package Telegram::BotKit::Keyboards;
 
 =cut
 
-use uft8;
-use JSON::MaybeXS;
 use common::sense;
+use JSON::MaybeXS;
+use Encode qw(decode);
 
 use Exporter qw(import);
 our @EXPORT_OK = qw(create_one_time_keyboard create_inline_keyboard parse_reply_markup available_keys);
@@ -71,7 +71,8 @@ sub create_one_time_keyboard {
 		keyboard => \@keyboard,
 		one_time_keyboard => JSON::MaybeXS::JSON->true
 		);
-	return JSON::MaybeXS::encode_json(\%rpl_markup);
+	my $json = JSON::MaybeXS->new(utf8 => 1);
+	return decode('UTF-8', $json->encode(\%rpl_markup));
 }
 
 =method create_inline_keyboard
@@ -112,7 +113,8 @@ sub create_inline_keyboard {
 	my %rpl_markup = (
 		inline_keyboard  => \@keyboard
 	);
-	return JSON::MaybeXS::encode_json(\%rpl_markup);
+	my $json = JSON::MaybeXS->new(utf8 => 1);
+	return decode('UTF-8', $json->encode(\%rpl_markup));
 }
 
 
